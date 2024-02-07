@@ -1,6 +1,6 @@
 import express from 'express'
 import { toursRouter } from './routes/tours-routes.js'
-import { userRoutes } from './routes/user-routes.js'
+import { userRouter } from './routes/user-routes.js'
 import morgan from 'morgan'
 
 const app = express()
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 // ! ROUTES
 
 app.use('/api/v1/tours', toursRouter)
-app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/users', userRouter)
 
 // ! STAR SERVER
 

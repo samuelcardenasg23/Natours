@@ -35,8 +35,8 @@ const deleteUser = (req, res) => {
   })
 }
 
-export const userRoutes = Router()
+export const userRouter = Router()
 
-userRoutes.route('/').get(getAllUsers).post(createUser)
+userRouter.route('/').get(getAllUsers).post(createUser)
 
-userRoutes.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
