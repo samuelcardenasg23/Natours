@@ -8,8 +8,10 @@ export const toursRouter = Router();
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`));
 
 toursRouter.get('/', (req, res) => {
+    console.log(req.requestTime);
     res.json({
         status: 'success',
+        requestedAt: req.requestTime,
         results: tours.length,
         data: {
             tours
