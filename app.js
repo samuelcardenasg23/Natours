@@ -3,7 +3,7 @@ import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
 import morgan from 'morgan'
 
-const app = express()
+export const app = express()
 app.disable('x-powered-by')
 
 //! MIDDLEWARES
@@ -26,11 +26,3 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/tours', toursRouter)
 app.use('/api/v1/users', userRouter)
-
-// ! STAR SERVER
-
-const port = process.env.PORT ?? 3000
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-})
