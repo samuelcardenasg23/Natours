@@ -18,6 +18,14 @@ export const checkID = (req, res, next, val) => {
   next()
 }
 
+export const checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price)
+    return res
+      .status(400)
+      .json({ status: 'Failed', message: 'Missing name or price' })
+  next()
+}
+
 export const getAllTours = (req, res) => {
   res.json({
     status: 'success',
