@@ -27,8 +27,10 @@ export const checkBody = (req, res, next) => {
 }
 
 export const getAllTours = (req, res) => {
+  console.log(req.requestTime)
   res.json({
     status: 'success',
+    requestedAt: req.requestTime,
     results: tours.length,
     data: {
       tours,
