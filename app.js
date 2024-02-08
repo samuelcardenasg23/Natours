@@ -1,8 +1,9 @@
 import express from 'express'
-import { toursRouter } from './routes/tours-routes.js'
-import { userRouter } from './routes/user-routes.js'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import { toursRouter } from './routes/tours-routes.js'
+import { userRouter } from './routes/user-routes.js'
+
 dotenv.config({ path: '.env' })
 
 export const app = express()
