@@ -1,7 +1,8 @@
 import dotenv from 'dotenv'
-dotenv.config({ path: '.env' })
 
 import { app } from './app.js'
+
+dotenv.config({ path: '.env' })
 
 // ! STAR SERVER
 

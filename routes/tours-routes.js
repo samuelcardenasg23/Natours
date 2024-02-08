@@ -6,7 +6,7 @@ import {
   updateTour,
   deleteTour,
   checkID,
-  checkBody,
+  checkBody
 } from '../controllers/tour-controller.js'
 
 export const toursRouter = Router()

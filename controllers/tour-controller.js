@@ -12,7 +12,7 @@ export const checkID = (req, res, next, val) => {
   if (Number(req.params.id) > tours.length) {
     return res.status(404).json({
       status: 'Failed',
-      message: 'Invalid ID',
+      message: 'Invalid ID'
     })
   }
   next()
@@ -33,8 +33,8 @@ export const getAllTours = (req, res) => {
     requestedAt: req.requestTime,
     results: tours.length,
     data: {
-      tours,
-    },
+      tours
+    }
   })
 }
 
@@ -48,8 +48,8 @@ export const getTour = (req, res) => {
   res.json({
     status: 'success',
     data: {
-      tour,
-    },
+      tour
+    }
   })
 }
 
@@ -68,8 +68,8 @@ export const createTour = (req, res) => {
       res.json({
         status: 'success',
         data: {
-          tour: newTour,
-        },
+          tour: newTour
+        }
       })
     }
   )
@@ -79,14 +79,14 @@ export const updateTour = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      tour: 'Updated tour here...',
-    },
+      tour: 'Updated tour here...'
+    }
   })
 }
 
 export const deleteTour = (req, res) => {
   res.status(204).json({
     status: 'success',
-    data: null,
+    data: null
   })
 }
