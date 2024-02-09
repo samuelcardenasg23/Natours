@@ -2,8 +2,17 @@ import { Tour } from '../models/tourModel.js'
 
 export const getAllTours = async (req, res) => {
   try {
-    const tours = await Tour.find()
+    // BUILD QUERY
+    const queryObj = { ...req.query }
+    const excludeFields = ['page', 'sort', 'limit', 'fields']
+    excludeFields.forEach((el) => delete queryObj[el])
 
+    const query = Tour.find(queryObj)
+
+    // EXECUTE QUERY
+    const tours = await query
+
+    // SEND RESPONSE
     res.json({
       status: 'success',
       results: tours.length,
