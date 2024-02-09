@@ -4,15 +4,13 @@ import {
   getTour,
   createTour,
   updateTour,
-  deleteTour,
-  checkID,
-  checkBody
+  deleteTour
 } from '../controllers/tour-controller.js'
 
 export const toursRouter = Router()
 
-toursRouter.param('id', checkID)
+// toursRouter.param('id')
 
-toursRouter.route('/').get(getAllTours).post(checkBody, createTour)
+toursRouter.route('/').get(getAllTours).post(createTour)
 
 toursRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
