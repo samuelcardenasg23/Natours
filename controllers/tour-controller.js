@@ -1,3 +1,4 @@
+import { Error } from 'mongoose'
 import { Tour } from '../models/tourModel.js'
 
 export const getAllTours = async (req, res) => {
@@ -22,12 +23,24 @@ export const getAllTours = async (req, res) => {
       query = query.sort('-createdAt')
     }
 
-    //FIELD LIMITING
+    // 3) FIELD LIMITING
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ')
       query = query.select(fields)
     } else {
       query = query.select('-__v')
+    }
+
+    // 4) PAGINATION
+    const page = Number(req.query.page) ?? 1
+    const limit = Number(req.query.limit) ?? 100
+    const skip = (page - 1) * limit
+
+    query = query.skip(skip).limit(limit)
+
+    if (req.query.page) {
+      const numberTours = await Tour.countDocuments()
+      if (skip >= numberTours) throw new Error('This page does not exist')
     }
 
     // EXECUTE QUERY
