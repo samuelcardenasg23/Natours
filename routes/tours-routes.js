@@ -4,12 +4,14 @@ import {
   getTour,
   createTour,
   updateTour,
-  deleteTour
+  deleteTour,
+  aliasTopTours
 } from '../controllers/tour-controller.js'
 
 export const toursRouter = Router()
 
 // toursRouter.param('id')
+toursRouter.route('/top-5-cheap').get(aliasTopTours, getAllTours)
 
 toursRouter.route('/').get(getAllTours).post(createTour)
 
