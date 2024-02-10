@@ -6,7 +6,8 @@ import {
   updateTour,
   deleteTour,
   aliasTopTours,
-  getTourStats
+  getTourStats,
+  getMonthlyPlan
 } from '../controllers/tour-controller.js'
 
 export const toursRouter = Router()
@@ -15,6 +16,8 @@ export const toursRouter = Router()
 toursRouter.route('/top-5-cheap').get(aliasTopTours, getAllTours)
 
 toursRouter.route('/tour-stats').get(getTourStats)
+
+toursRouter.route('/monthly-plan/:year').get(getMonthlyPlan)
 
 toursRouter.route('/').get(getAllTours).post(createTour)
 
