@@ -1,5 +1,6 @@
 import { Tour } from '../models/tourModel.js'
 import { APIFeatures } from '../utils/apiFeatures.js'
+import { AppError } from '../utils/appError.js'
 
 export const aliasTopTours = (req, res, next) => {
   req.query.limit = '5'
@@ -27,16 +28,23 @@ export const getAllTours = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }
 
-export const getTour = async (req, res) => {
+export const getTour = async (req, res, next) => {
   try {
     const tour = await Tour.findById(req.params.id)
+
+    if (!tour) {
+      return next(new AppError('No tour found with that ID', 404))
+    }
 
     res.json({
       status: 'success',
@@ -45,12 +53,25 @@ export const getTour = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    // ESTE POR SI ALGO
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
+
+    // res.status(404).json({
+    //   status: 'Failed',
+    //   message: err
+    // })
   }
 }
+
+// const catchAsync = (fn) => (req, res, next) => {
+//   fn(req, res, next).catch(next)
+// }
 
 export const createTour = async (req, res) => {
   try {
@@ -63,9 +84,12 @@ export const createTour = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(400).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }
@@ -83,9 +107,12 @@ export const updateTour = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }
@@ -98,9 +125,12 @@ export const deleteTour = async (req, res) => {
       data: null
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }
@@ -134,9 +164,12 @@ export const getTourStats = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }
@@ -188,9 +221,12 @@ export const getMonthlyPlan = async (req, res) => {
       }
     })
   } catch (err) {
-    res.status(404).json({
-      status: 'Failed',
-      message: err
+    err.statusCode = err.statusCode ?? 500
+    err.status = err.status ?? 'error'
+
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
     })
   }
 }

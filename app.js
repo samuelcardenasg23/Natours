@@ -32,7 +32,7 @@ app.use('/api/v1/tours', toursRouter)
 app.use('/api/v1/users', userRouter)
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't fing ${req.originalUrl} in the server!`, 404))
+  next(new AppError(`Can't find ${req.originalUrl} in the server!`, 404))
 })
 
 app.use(globalErrorHandler)
