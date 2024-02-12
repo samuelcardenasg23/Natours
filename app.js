@@ -3,6 +3,8 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
+import { AppError } from './utils/appError.js'
+import { globalErrorHandler } from './controllers/errorController.js'
 
 dotenv.config({ path: '.env' })
 
@@ -19,11 +21,6 @@ app.use(express.json())
 app.use(express.static('public'))
 
 app.use((req, res, next) => {
-  console.log('Hello from the middleware 👌')
-  next()
-})
-
-app.use((req, res, next) => {
   req.requestTime = new Date().toISOString()
 
   next()
@@ -33,3 +30,9 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/tours', toursRouter)
 app.use('/api/v1/users', userRouter)
+
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't fing ${req.originalUrl} in the server!`, 404))
+})
+
+app.use(globalErrorHandler)
