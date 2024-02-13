@@ -1,6 +1,12 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
+process.on('uncaughtException', (err) => {
+  console.log('UNHANDLER REJECTION ❌ Shutting down...')
+  console.log(err.name, err.message)
+  process.exit(1)
+})
+
 import { app } from './app.js'
 
 dotenv.config({ path: '.env' })
@@ -16,6 +22,14 @@ mongoose.connect(DB).then(() => console.log('DB connection succesful ✅'))
 
 const port = process.env.PORT ?? 3000
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
+})
+
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDLER REJECTION ❌ Shutting down...')
+  console.log(err.name, err.message)
+  server.close(() => {
+    process.exit(1)
+  })
 })
