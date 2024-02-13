@@ -6,8 +6,11 @@ import {
   updateUser,
   deleteUser
 } from '../controllers/user-controller.js'
+import { signup } from '../controllers/authController.js'
 
 export const userRouter = Router()
+
+userRouter.post('/signup', signup)
 
 userRouter.route('/').get(getAllUsers).post(createUser)
 
