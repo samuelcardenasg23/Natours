@@ -22,6 +22,7 @@ app.use(express.static('public'))
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString()
+  // console.log(req.headers)
 
   next()
 })
