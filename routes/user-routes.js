@@ -6,11 +6,12 @@ import {
   updateUser,
   deleteUser
 } from '../controllers/user-controller.js'
-import { signup } from '../controllers/authController.js'
+import { login, signup } from '../controllers/authController.js'
 
 export const userRouter = Router()
 
 userRouter.post('/signup', signup)
+userRouter.post('/login', login)
 
 userRouter.route('/').get(getAllUsers).post(createUser)
 
