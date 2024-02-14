@@ -9,7 +9,7 @@ import {
   getTourStats,
   getMonthlyPlan
 } from '../controllers/tour-controller.js'
-import { protect } from '../controllers/authController.js'
+import { protect, restrictTo } from '../controllers/authController.js'
 
 export const toursRouter = Router()
 
@@ -22,4 +22,8 @@ toursRouter.route('/monthly-plan/:year').get(getMonthlyPlan)
 
 toursRouter.route('/').get(protect, getAllTours).post(createTour)
 
-toursRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
+toursRouter
+  .route('/:id')
+  .get(getTour)
+  .patch(updateTour)
+  .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour)
