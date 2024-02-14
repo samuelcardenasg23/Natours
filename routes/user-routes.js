@@ -6,12 +6,20 @@ import {
   updateUser,
   deleteUser
 } from '../controllers/user-controller.js'
-import { login, signup } from '../controllers/authController.js'
+import {
+  login,
+  signup,
+  forgotPassword,
+  resetPassword
+} from '../controllers/authController.js'
 
 export const userRouter = Router()
 
 userRouter.post('/signup', signup)
 userRouter.post('/login', login)
+
+userRouter.post('/forgotPassword', forgotPassword)
+userRouter.post('/resetPassword', resetPassword)
 
 userRouter.route('/').get(getAllUsers).post(createUser)
 
