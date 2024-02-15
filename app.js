@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import { rateLimit } from 'express-rate-limit'
 import helmet from 'helmet'
+import mongoSanitize from 'express-mongo-sanitize'
 import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
@@ -34,6 +35,11 @@ app.use('/api', limiter)
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }))
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize())
+
+//Data sanitization against XSS
 
 // Serving static files
 app.use(express.static('public'))
