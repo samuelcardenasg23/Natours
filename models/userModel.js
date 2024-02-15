@@ -2,21 +2,11 @@ import crypto from 'node:crypto'
 import mongoose from 'mongoose'
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
-import { stringify } from 'node:querystring'
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'You must input your name']
-    // trim: true,
-    // maxlength: [50, 'Your name must have less or equal tha 40 characters'],
-    // minlength: [5, 'Your name must have more or equal than 5 characters'],
-    // validate: {
-    //   validator: function (val) {
-    //     return validator.isAlpha(val.replace(/ /g, ''))
-    //   },
-    //   message: 'Your name must only contain characters'
-    // }
   },
   email: {
     type: String,
@@ -42,6 +32,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please confirm your password'],
     validate: {
+      // This only works on CREATE and SAVE
       validator: function (el) {
         return el === this.password
       },

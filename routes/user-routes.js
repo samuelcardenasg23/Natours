@@ -4,7 +4,8 @@ import {
   createUser,
   getUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  updateMe
 } from '../controllers/user-controller.js'
 import {
   login,
@@ -24,6 +25,8 @@ userRouter.post('/forgotPassword', forgotPassword)
 userRouter.patch('/resetPassword/:token', resetPassword)
 
 userRouter.patch('/updateMyPassword', protect, updatePassword)
+
+userRouter.patch('/updateMe', protect, updateMe)
 
 userRouter.route('/').get(getAllUsers).post(createUser)
 
