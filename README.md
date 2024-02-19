@@ -1,17 +1,6 @@
-# Tours Website
+# Natours
 
-Welcome to the Tours Website project! This web application allows users to browse through different tour offers, sign up, log in, and purchase tours.
-
-## Table of Contents
-
-- [Tours Website](#tours-website)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Technologies Used](#technologies-used)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [License](#license)
+Welcome to Natours project! This web application allows users to browse through different tour offers, sign up, log in, and purchase tours.
 
 ## Features
 
