@@ -10,8 +10,11 @@ import {
   getMonthlyPlan
 } from '../controllers/tour-controller.js'
 import { protect, restrictTo } from '../controllers/authController.js'
+import { reviewsRouter } from './reviewRoutes.js'
 
 export const toursRouter = Router()
+
+toursRouter.use('/:tourId/reviews', reviewsRouter)
 
 // toursRouter.param('id')
 toursRouter.route('/top-5-cheap').get(aliasTopTours, getAllTours)
