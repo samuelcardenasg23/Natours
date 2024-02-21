@@ -6,7 +6,8 @@ import {
   updateUser,
   deleteUser,
   updateMe,
-  deleteMe
+  deleteMe,
+  getMe
 } from '../controllers/user-controller.js'
 import {
   login,
@@ -27,6 +28,7 @@ userRouter.patch('/resetPassword/:token', resetPassword)
 
 userRouter.patch('/updateMyPassword', protect, updatePassword)
 
+userRouter.get('/me', protect, getMe, getUser)
 userRouter.patch('/updateMe', protect, updateMe)
 userRouter.delete('/deleteMe', protect, deleteMe)
 
