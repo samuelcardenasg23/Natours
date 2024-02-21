@@ -1,8 +1,13 @@
 import { Tour } from '../models/tourModel.js'
-import { APIFeatures } from '../utils/apiFeatures.js'
-import { AppError } from '../utils/appError.js'
 import { catchAsync } from '../utils/catchAsync.js'
-import { createOne, deleteOne, updateOne } from './handlerFactory.js'
+import {
+  createOne,
+  deleteOne,
+  getAll,
+  getOne,
+  updateOne
+} from './handlerFactory.js'
+// import { AppError } from '../utils/appError.js'
 
 const aliasTopTours = (req, res, next) => {
   req.query.limit = '5'
@@ -11,58 +16,15 @@ const aliasTopTours = (req, res, next) => {
   next()
 }
 
-const getAllTours = catchAsync(async (req, res, next) => {
-  // EXECUTE QUERY
-  const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate()
-  const tours = await features.query
+const getAllTours = getAll(Tour)
 
-  // SEND RESPONSE
-  res.json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      tours
-    }
-  })
-})
-
-const getTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findById(req.params.id).populate('reviews')
-
-  if (!tour) {
-    return next(new AppError('No tour found with that ID', 404))
-  }
-
-  res.json({
-    status: 'success',
-    data: {
-      tour
-    }
-  })
-})
+const getTour = getOne(Tour, { path: 'reviews' })
 
 const createTour = createOne(Tour)
 
 const updateTour = updateOne(Tour)
 
 const deleteTour = deleteOne(Tour)
-
-// export const deleteTour = catchAsync(async (req, res, next) => {
-//   const tour = await Tour.findByIdAndDelete(req.params.id)
-
-//   if (!tour) {
-//     return next(new AppError('No tour found with that ID', 404))
-//   }
-
-//   res.status(204).json({
-//     status: 'success',
-//     data: null
-//   })
-// })
 
 const getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([

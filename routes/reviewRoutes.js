@@ -4,7 +4,8 @@ import {
   createReview,
   deleteReview,
   updateReview,
-  setTourUserIds
+  setTourUserIds,
+  getReview
 } from '../controllers/reviewController.js'
 import { protect, restrictTo } from '../controllers/authController.js'
 
@@ -15,4 +16,8 @@ reviewsRouter
   .get(getAllReviews)
   .post(protect, restrictTo('user'), setTourUserIds, createReview)
 
-reviewsRouter.route('/:id').patch(updateReview).delete(deleteReview)
+reviewsRouter
+  .route('/:id')
+  .get(getReview)
+  .patch(updateReview)
+  .delete(deleteReview)

@@ -1,21 +1,12 @@
 import { Review } from '../models/reviewModel.js'
-import { catchAsync } from '../utils/catchAsync.js'
-import { createOne, deleteOne, updateOne } from './handlerFactory.js'
-
-const getAllReviews = catchAsync(async (req, res, next) => {
-  let filter = {}
-  if (req.params.tourId) filter = { tour: req.params.tourId }
-
-  const reviews = await Review.find(filter)
-
-  res.status(200).json({
-    status: 'success',
-    results: reviews.length,
-    data: {
-      reviews
-    }
-  })
-})
+// import { catchAsync } from '../utils/catchAsync.js'
+import {
+  createOne,
+  deleteOne,
+  getAll,
+  getOne,
+  updateOne
+} from './handlerFactory.js'
 
 //Middleware
 const setTourUserIds = (req, res, next) => {
@@ -24,6 +15,10 @@ const setTourUserIds = (req, res, next) => {
   if (!req.body.user) req.body.user = req.user.id
   next()
 }
+
+const getAllReviews = getAll(Review)
+
+const getReview = getOne(Review)
 
 const createReview = createOne(Review)
 
@@ -36,5 +31,6 @@ export {
   createReview,
   updateReview,
   deleteReview,
-  setTourUserIds
+  setTourUserIds,
+  getReview
 }
