@@ -21,12 +21,17 @@ toursRouter.route('/top-5-cheap').get(aliasTopTours, getAllTours)
 
 toursRouter.route('/tour-stats').get(getTourStats)
 
-toursRouter.route('/monthly-plan/:year').get(getMonthlyPlan)
+toursRouter
+  .route('/monthly-plan/:year')
+  .get(protect, restrictTo('admin', 'lead-guide', 'guide'), getMonthlyPlan)
 
-toursRouter.route('/').get(protect, getAllTours).post(createTour)
+toursRouter
+  .route('/')
+  .get(getAllTours)
+  .post(protect, restrictTo('admin', 'lead-guide'), createTour)
 
 toursRouter
   .route('/:id')
   .get(getTour)
-  .patch(updateTour)
+  .patch(protect, restrictTo('admin', 'lead-guide'), updateTour)
   .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour)

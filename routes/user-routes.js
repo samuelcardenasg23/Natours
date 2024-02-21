@@ -15,22 +15,26 @@ import {
   forgotPassword,
   resetPassword,
   protect,
-  updatePassword
+  updatePassword,
+  restrictTo
 } from '../controllers/authController.js'
 
 export const userRouter = Router()
 
 userRouter.post('/signup', signup)
 userRouter.post('/login', login)
-
 userRouter.post('/forgotPassword', forgotPassword)
 userRouter.patch('/resetPassword/:token', resetPassword)
 
-userRouter.patch('/updateMyPassword', protect, updatePassword)
+userRouter.use(protect)
 
-userRouter.get('/me', protect, getMe, getUser)
-userRouter.patch('/updateMe', protect, updateMe)
-userRouter.delete('/deleteMe', protect, deleteMe)
+userRouter.patch('/updateMyPassword', updatePassword)
+
+userRouter.get('/me', getMe, getUser)
+userRouter.patch('/updateMe', updateMe)
+userRouter.delete('/deleteMe', deleteMe)
+
+userRouter.use(restrictTo('admin'))
 
 userRouter.route('/').get(getAllUsers).post(createUser)
 

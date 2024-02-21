@@ -11,13 +11,15 @@ import { protect, restrictTo } from '../controllers/authController.js'
 
 export const reviewsRouter = Router({ mergeParams: true })
 
+reviewsRouter.use(protect)
+
 reviewsRouter
   .route('/')
   .get(getAllReviews)
-  .post(protect, restrictTo('user'), setTourUserIds, createReview)
+  .post(restrictTo('user'), setTourUserIds, createReview)
 
 reviewsRouter
   .route('/:id')
   .get(getReview)
-  .patch(updateReview)
-  .delete(deleteReview)
+  .patch(restrictTo('user', 'admin'), updateReview)
+  .delete(restrictTo('user', 'admin'), deleteReview)
