@@ -23,7 +23,7 @@ Welcome to Natours project! This web application allows users to browse through 
 - bcrypt
 - jsonwebtoken
 - nodemailer
-- Other dependencies (list any additional dependencies here)
+- Other dependencies
 
 ## Installation
 
