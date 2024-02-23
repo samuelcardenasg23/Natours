@@ -8,7 +8,8 @@ import {
   aliasTopTours,
   getTourStats,
   getMonthlyPlan,
-  getToursWithin
+  getToursWithin,
+  getDistances
 } from '../controllers/tour-controller.js'
 import { protect, restrictTo } from '../controllers/authController.js'
 import { reviewsRouter } from './reviewRoutes.js'
@@ -27,8 +28,10 @@ toursRouter
   .get(protect, restrictTo('admin', 'lead-guide', 'guide'), getMonthlyPlan)
 
 toursRouter
-  .route('/tours-within/:distance/center/:latlng/:unit')
+  .route('/tours-within/:distance/center/:latlng/unit/:unit')
   .get(getToursWithin)
+
+toursRouter.route('/distances/:latlng/unit/:unit').get(getDistances)
 
 toursRouter
   .route('/')
