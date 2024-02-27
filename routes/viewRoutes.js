@@ -4,4 +4,4 @@ import { getOverview, getTour } from '../controllers/viewController.js'
 export const viewRouter = Router()
 
 viewRouter.get('/', getOverview)
-viewRouter.get('/tour', getTour)
+viewRouter.get('/tour/:slug', getTour)
