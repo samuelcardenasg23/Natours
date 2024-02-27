@@ -23,7 +23,7 @@ const getTour = catchAsync(async (req, res) => {
   })
 
   res.status(200).render('tour', {
-    title: 'The Forest hiker Tour',
+    title: `${tour.name} Tour`,
     tour
   })
 })
