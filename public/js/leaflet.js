@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-console.log('hello from the client side')
 const locations = JSON.parse(document.getElementById('map').dataset.locations)
 
 var map = L.map('map', {
@@ -44,5 +43,3 @@ locations.forEach((loc) => {
 
 const bounds = L.latLngBounds(points).pad(0.5)
 map.fitBounds(bounds)
-
-console.log(locations)
