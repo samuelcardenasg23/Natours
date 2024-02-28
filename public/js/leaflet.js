@@ -7,13 +7,6 @@ var map = L.map('map', {
   doubleClickZoom: false,
   scrollWheelZoom: false
 })
-// const map = L.map('map', {
-//   attributionControl: false,
-//   zoomControl: false,
-//   scrollWheelZoom: false,
-//   doubleClickZoom: false,
-//   zoomSnap: 0.1 // important for perfect fit of the bounds
-// })
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:
