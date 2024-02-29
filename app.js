@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import { rateLimit } from 'express-rate-limit'
 import helmet from 'helmet'
 import mongoSanitize from 'express-mongo-sanitize'
+import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
@@ -32,7 +33,11 @@ app.use(
 )
 
 // Further HELMET configuration for Security Policy (CSP)
-const scriptSrcUrls = ['https://unpkg.com/', 'https://tile.openstreetmap.org']
+const scriptSrcUrls = [
+  'https://unpkg.com/',
+  'https://tile.openstreetmap.org',
+  'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js'
+]
 const styleSrcUrls = [
   'https://unpkg.com/',
   'https://tile.openstreetmap.org',
@@ -74,6 +79,7 @@ app.use('/api', limiter)
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }))
+app.use(cookieParser())
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize())
@@ -83,7 +89,7 @@ app.use(mongoSanitize())
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString()
-  // console.log(req.headers)
+  console.log(req.cookies)
 
   next()
 })
