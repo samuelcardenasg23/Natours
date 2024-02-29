@@ -4,11 +4,13 @@ import {
   getOverview,
   getTour
 } from '../controllers/viewController.js'
-import { protect } from '../controllers/authController.js'
+import { isLoggedIn } from '../controllers/authController.js'
 
 export const viewRouter = Router()
 
+viewRouter.use(isLoggedIn)
+
 viewRouter.get('/', getOverview)
-viewRouter.get('/tour/:slug', protect, getTour)
+viewRouter.get('/tour/:slug', getTour)
 
 viewRouter.get('/login', getLoginForm)
