@@ -1,11 +1,12 @@
 /* eslint-disable */
 
 import { displayMap } from './leaflet'
-import { login } from './login'
+import { login, logout } from './login'
 
 // DOM ELEMENTS
 const leaflet = document.getElementById('map')
 const loginForm = document.querySelector('.form')
+const logoutBtn = document.querySelector('.nav__el--logout')
 
 // DELEGATION
 if (leaflet) {
@@ -21,3 +22,5 @@ if (loginForm) {
     login(email, password)
   })
 }
+
+if (logoutBtn) logoutBtn.addEventListener('click', logout)

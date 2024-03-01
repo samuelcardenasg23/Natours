@@ -16,13 +16,16 @@ import {
   resetPassword,
   protect,
   updatePassword,
-  restrictTo
+  restrictTo,
+  logout
 } from '../controllers/authController.js'
 
 export const userRouter = Router()
 
 userRouter.post('/signup', signup)
 userRouter.post('/login', login)
+userRouter.get('/logout', logout)
+
 userRouter.post('/forgotPassword', forgotPassword)
 userRouter.patch('/resetPassword/:token', resetPassword)
 
