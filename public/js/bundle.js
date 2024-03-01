@@ -2224,10 +2224,30 @@
     }
   };
 
+  // public/js/updateSettings.js
+  var updateData = async (name, email) => {
+    try {
+      const res = await axios_default({
+        method: "PATCH",
+        url: "http://localhost:3000/api/v1/users/updateMe",
+        data: {
+          name,
+          email
+        }
+      });
+      if (res.data.status === "success") {
+        showAlert("success", "Data updated succesfully");
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+
   // public/js/index.js
   var leaflet = document.getElementById("map");
-  var loginForm = document.querySelector(".form");
+  var loginForm = document.querySelector(".form--login");
   var logoutBtn = document.querySelector(".nav__el--logout");
+  var userDataForm = document.querySelector(".form-user-data");
   if (leaflet) {
     const locations = JSON.parse(leaflet.dataset.locations);
     displayMap(locations);
@@ -2242,4 +2262,12 @@
   }
   if (logoutBtn)
     logoutBtn.addEventListener("click", logout);
+  if (userDataForm) {
+    userDataForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      updateData(name, email);
+    });
+  }
 })();
