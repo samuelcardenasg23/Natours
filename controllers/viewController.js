@@ -1,5 +1,6 @@
 import { Tour } from '../models/tourModel.js'
 import { catchAsync } from '../utils/catchAsync.js'
+import { AppError } from '../utils/appError.js'
 
 const getOverview = catchAsync(async (req, res, next) => {
   // 1) Get tour data from our collection
@@ -21,6 +22,10 @@ const getTour = catchAsync(async (req, res, next) => {
     path: 'reviews',
     fields: 'review rating user'
   })
+
+  if (!tour) {
+    return next(new AppError('There is no tour with that name.', 404))
+  }
 
   res.status(200).render('tour', {
     title: `${tour.name} Tour`,
