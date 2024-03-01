@@ -1,16 +1,17 @@
 import { Router } from 'express'
 import {
   getLoginForm,
+  getAccount,
   getOverview,
   getTour
 } from '../controllers/viewController.js'
-import { isLoggedIn } from '../controllers/authController.js'
+import { isLoggedIn, protect } from '../controllers/authController.js'
 
 export const viewRouter = Router()
 
-viewRouter.use(isLoggedIn)
+viewRouter.get('/', isLoggedIn, getOverview)
+viewRouter.get('/tour/:slug', isLoggedIn, getTour)
 
-viewRouter.get('/', getOverview)
-viewRouter.get('/tour/:slug', getTour)
+viewRouter.get('/login', isLoggedIn, getLoginForm)
 
-viewRouter.get('/login', getLoginForm)
+viewRouter.get('/me', protect, getAccount)
