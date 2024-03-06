@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import multer from 'multer'
 import {
   getAllUsers,
   createUser,
@@ -8,7 +7,8 @@ import {
   deleteUser,
   updateMe,
   deleteMe,
-  getMe
+  getMe,
+  uploadUserPhoto
 } from '../controllers/user-controller.js'
 import {
   login,
@@ -20,8 +20,6 @@ import {
   restrictTo,
   logout
 } from '../controllers/authController.js'
-
-const upload = multer({ dest: 'public/img/users' })
 
 export const userRouter = Router()
 
@@ -37,7 +35,7 @@ userRouter.use(protect)
 userRouter.patch('/updateMyPassword', updatePassword)
 
 userRouter.get('/me', getMe, getUser)
-userRouter.patch('/updateMe', upload.single('photo'), updateMe)
+userRouter.patch('/updateMe', uploadUserPhoto, updateMe)
 userRouter.delete('/deleteMe', deleteMe)
 
 userRouter.use(restrictTo('admin'))
