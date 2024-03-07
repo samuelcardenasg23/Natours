@@ -8,7 +8,8 @@ import {
   updateMe,
   deleteMe,
   getMe,
-  uploadUserPhoto
+  uploadUserPhoto,
+  resizeUserPhoto
 } from '../controllers/user-controller.js'
 import {
   login,
@@ -35,7 +36,7 @@ userRouter.use(protect)
 userRouter.patch('/updateMyPassword', updatePassword)
 
 userRouter.get('/me', getMe, getUser)
-userRouter.patch('/updateMe', uploadUserPhoto, updateMe)
+userRouter.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe)
 userRouter.delete('/deleteMe', deleteMe)
 
 userRouter.use(restrictTo('admin'))
