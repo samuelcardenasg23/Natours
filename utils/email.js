@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import pug from 'pug'
-import { convert, htmlToText } from 'html-to-text'
+import { convert } from 'html-to-text'
 
 const __dirname = import.meta.dirname
 
@@ -14,9 +14,16 @@ class Email {
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
-      // Sendgrid
-      return 1
+    if (process.env.NODE_ENV === 'production ') {
+      // Brevo
+      return nodemailer.createTransport({
+        host: process.env.BREVO_HOST,
+        port: process.env.BREVO_PORT,
+        auth: {
+          user: process.env.BREVO_USERNAME,
+          pass: process.env.BREVO_PASSWORD
+        }
+      })
     }
 
     return nodemailer.createTransport({
