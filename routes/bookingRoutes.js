@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { protect, restrictTo } from '../controllers/authController.js'
+import { protect } from '../controllers/authController.js'
 import { getCheckoutSession } from '../controllers/bookingController.js'
 
 export const bookingRouter = Router()

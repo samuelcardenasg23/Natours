@@ -30,7 +30,10 @@ app.use(express.static('public'))
 
 // Set security HTTP headers https://github.com/helmetjs/helmet
 app.use(
-  helmet({ crossOriginResourcePolicy: false, crossOriginEmbedderPolicy: false })
+  helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false
+  })
 )
 
 // Further HELMET configuration for Security Policy (CSP)
