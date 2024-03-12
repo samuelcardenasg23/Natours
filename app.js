@@ -9,6 +9,7 @@ import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
 import { reviewsRouter } from './routes/reviewRoutes.js'
+import { bookingRouter } from './routes/bookingRoutes.js'
 import { viewRouter } from './routes/viewRoutes.js'
 import { AppError } from './utils/appError.js'
 import { globalErrorHandler } from './controllers/errorController.js'
@@ -100,6 +101,7 @@ app.use('/', viewRouter)
 app.use('/api/v1/tours', toursRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/reviews', reviewsRouter)
+app.use('/api/v1/bookings', bookingRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} in the server!`, 404))
