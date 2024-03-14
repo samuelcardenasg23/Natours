@@ -170,10 +170,10 @@ tourSchema.pre(/^find/, function (next) {
   next()
 })
 
-tourSchema.post(/^find/, function (docs, next) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds`)
-  next()
-})
+// tourSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds`)
+//   next()
+// })
 
 // AGGREGATION MIDDLEWARE
 // tourSchema.pre('aggregate', function (next) {
@@ -188,12 +188,12 @@ tourSchema.pre('aggregate', function (next) {
   // Check if $geoNear is the first operator in the pipeline
   if (!pipeline.length || (pipeline.length > 0 && pipeline[0].$geoNear)) {
     // If $geoNear is the first operator, do nothing
-    console.log(this.pipeline())
+    // console.log(this.pipeline())
     next()
   } else {
     // If $geoNear is not the first operator, add $match stage
     pipeline.unshift({ $match: { secretTour: { $ne: true } } })
-    console.log(this.pipeline())
+    // console.log(this.pipeline())
     next()
   }
 })

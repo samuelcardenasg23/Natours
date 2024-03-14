@@ -8516,7 +8516,6 @@
       const session = await axios_default(
         `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`
       );
-      console.log(session);
       window.location.assign(session.data.session.url);
     } catch (err) {
       console.log(err);
@@ -8552,7 +8551,6 @@
       form.append("name", document.getElementById("name").value);
       form.append("email", document.getElementById("email").value);
       form.append("photo", document.getElementById("photo").files[0]);
-      console.log(form);
       updateSettings(form, "data");
     });
   }
