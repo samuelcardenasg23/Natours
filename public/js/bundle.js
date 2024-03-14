@@ -4324,7 +4324,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "http://localhost:3000/api/v1/users/login",
+        url: "/api/v1/users/login",
         data: {
           email,
           password
@@ -4344,7 +4344,7 @@
     try {
       const res = await axios_default({
         method: "GET",
-        url: "http://localhost:3000/api/v1/users/logout"
+        url: "/api/v1/users/logout"
       });
       if (res.data.status === "success") {
         showAlert("success", "Logged out succesfully");
@@ -4361,7 +4361,7 @@
   // public/js/updateSettings.js
   var updateSettings = async (data, type) => {
     try {
-      const url = type === "password" ? "http://localhost:3000/api/v1/users/updateMyPassword" : "http://localhost:3000/api/v1/users/updateMe";
+      const url = type === "password" ? "/api/v1/users/updateMyPassword" : "/api/v1/users/updateMe";
       const res = await axios_default({
         method: "PATCH",
         url,
@@ -8513,9 +8513,7 @@
       "pk_test_51OtOosJ7DSCvQ4do2MGehQGxln3qsO1BBWUh7r4SGqEeG85xLbpoDefnsxGP5RokAvBvopHYjK7VsTmI642QXc5y00pPezhg6g"
     );
     try {
-      const session = await axios_default(
-        `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`
-      );
+      const session = await axios_default(`/api/v1/bookings/checkout-session/${tourId}`);
       window.location.assign(session.data.session.url);
     } catch (err) {
       console.log(err);
