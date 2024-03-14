@@ -5,6 +5,7 @@ import { rateLimit } from 'express-rate-limit'
 import helmet from 'helmet'
 import mongoSanitize from 'express-mongo-sanitize'
 import cookieParser from 'cookie-parser'
+import compression from 'compression'
 import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
@@ -89,7 +90,7 @@ app.use(cookieParser())
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize())
 
-//Data sanitization against XSS
+app.use(compression())
 
 // Test middleware
 app.use((req, res, next) => {
