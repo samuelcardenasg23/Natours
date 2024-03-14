@@ -3,7 +3,8 @@ import {
   getLoginForm,
   getAccount,
   getOverview,
-  getTour
+  getTour,
+  getMyTours
 } from '../controllers/viewController.js'
 import { isLoggedIn, protect } from '../controllers/authController.js'
 import { createBookingCheckout } from '../controllers/bookingController.js'
@@ -16,3 +17,5 @@ viewRouter.get('/tour/:slug', isLoggedIn, getTour)
 viewRouter.get('/login', isLoggedIn, getLoginForm)
 
 viewRouter.get('/me', protect, getAccount)
+
+viewRouter.get('/my-tours', protect, getMyTours)
