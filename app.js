@@ -6,6 +6,7 @@ import helmet from 'helmet'
 import mongoSanitize from 'express-mongo-sanitize'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import { toursRouter } from './routes/tours-routes.js'
 import { userRouter } from './routes/user-routes.js'
@@ -26,6 +27,11 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 
 //! GLOBAL MIDDLEWARES
+// Implement CORS
+app.use(cors())
+// Access-Control-Allow-Origin *
+app.options('*', cors())
+
 // Serving static files (might use path.join)
 app.use(express.static('public'))
 
